@@ -6,7 +6,7 @@ edition = "2018"
 
 
 [dependencies]
-solana-program = "1.6.22"
+solana-program = "1.8.0"
 
 
 [lib]

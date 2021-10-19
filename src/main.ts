@@ -1,5 +1,5 @@
 import "regenerator-runtime/runtime"
-import {Connection, PublicKey, SystemProgram, Transaction, TransactionInstruction,} from "@solana/web3.js"
+import {Connection, PublicKey, SystemProgram, SYSVAR_CLOCK_PUBKEY, Transaction, TransactionInstruction} from "@solana/web3.js"
 import Wallet from "@project-serum/sol-wallet-adapter"
 import lo from "buffer-layout"
 import BN from "bn.js"
@@ -12,6 +12,7 @@ declare global {
 
 
 const connection = new Connection("https://api.testnet.solana.com")
+// const connection = new Connection("http://localhost:8899")
 
 let solletWallet = new Wallet("https://www.sollet.io", null)
 solletWallet.on("connect", (publicKey) => console.log("sollet connected", publicKey.toBase58()))
@@ -44,6 +45,7 @@ async function prepareTransaction(userPubkey: PublicKey): Promise<Transaction> {
             {pubkey: userPubkey, isSigner: true, isWritable: true},
             {pubkey: bobPubkey, isSigner: false, isWritable: true},
             {pubkey: SystemProgram.programId, isSigner: false, isWritable: false},
+            {pubkey: SYSVAR_CLOCK_PUBKEY, isSigner: false, isWritable: false}
         ],
         programId: programId,
         data: data,

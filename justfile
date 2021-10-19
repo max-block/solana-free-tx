@@ -16,6 +16,10 @@ deploy-testnet:
 	cd program; cargo build-bpf
 	solana program deploy program/target/deploy/program.so -u testnet --program-id keys/program.json --keypair keys/alice.json --upgrade-authority keys/alice.json
 
+deploy-mainnet:
+	cd program; cargo build-bpf
+	solana program deploy program/target/deploy/program.so -u mainnet-beta --program-id keys/program.json --keypair keys/alice.json --upgrade-authority keys/alice.json
+
 
 browser:
 	npm start
